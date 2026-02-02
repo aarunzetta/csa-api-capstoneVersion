@@ -123,14 +123,6 @@ const createRide = async (req, res) => {
       completed_at,
     } = req.body;
 
-    // Validate required fields
-    if (!driver_id || !passenger_id) {
-      return res.status(400).json({
-        success: false,
-        message: "Driver ID and Passenger ID are required.",
-      });
-    }
-
     // Check if driver exists
     const [driver] = await db.query(
       "SELECT driver_id FROM drivers WHERE driver_id = ?",

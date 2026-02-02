@@ -82,21 +82,6 @@ const createDriver = async (req, res) => {
       qr_code,
     } = req.body;
 
-    // Validate required fields
-    if (
-      !first_name ||
-      !last_name ||
-      !date_of_birth ||
-      !license_number ||
-      !license_expiration_date
-    ) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Please provide all required fields: first_name, last_name, date_of_birth, license_number, license_expiration_date",
-      });
-    }
-
     // Check if license number already exists
     const [existingLicense] = await db.query(
       "SELECT driver_id FROM drivers WHERE license_number = ?",

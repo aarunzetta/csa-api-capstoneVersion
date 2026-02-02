@@ -112,22 +112,6 @@ const createFeedback = async (req, res) => {
   try {
     const { ride_id, passenger_id, driver_id, rating, comment } = req.body;
 
-    // Validate required fields
-    if (!ride_id || !passenger_id || !driver_id) {
-      return res.status(400).json({
-        success: false,
-        message: "Ride ID, Passenger ID, and Driver ID are required.",
-      });
-    }
-
-    // Validate rating (1-5)
-    if (rating && (rating < 1 || rating > 5)) {
-      return res.status(400).json({
-        success: false,
-        message: "Rating must be between 1 and 5.",
-      });
-    }
-
     // Check if ride exists
     const [ride] = await db.query(
       "SELECT ride_id FROM rides WHERE ride_id = ?",

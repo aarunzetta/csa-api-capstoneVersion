@@ -71,24 +71,6 @@ const createAdmin = async (req, res) => {
       is_active,
     } = req.body;
 
-    // Validate required fields
-    if (!username || !first_name || !last_name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Please provide all required fields: username, first_name, last_name, email, password",
-      });
-    }
-
-    // Validate role
-    const validRoles = ["super_admin", "admin", "moderator"];
-    if (role && !validRoles.includes(role)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid role. Must be: super_admin, admin, or moderator",
-      });
-    }
-
     // Check if username already exists
     const [existingUsername] = await db.query(
       "SELECT admin_id FROM admins WHERE username = ?",
@@ -180,15 +162,6 @@ const updateAdmin = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Admin not found.",
-      });
-    }
-
-    // Validate role if provided
-    const validRoles = ["super_admin", "admin", "moderator"];
-    if (role && !validRoles.includes(role)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid role. Must be: super_admin, admin, or moderator",
       });
     }
 
