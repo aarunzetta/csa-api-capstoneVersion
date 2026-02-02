@@ -8,6 +8,11 @@ const {
   deletePassenger,
 } = require("../controllers/passengerController");
 const { verifyToken } = require("../middleware/authMiddleware");
+const validate = require("../middleware/validate");
+const {
+  createPassengerSchema,
+  updatePassengerSchema,
+} = require("../validators/passengerValidator");
 
 // All routes are protected - require authentication
 router.use(verifyToken);
@@ -19,10 +24,10 @@ router.get("/", getAllPassengers);
 router.get("/:id", getPassengerById);
 
 // POST /api/passengers - Create new passenger
-router.post("/", createPassenger);
+router.post("/", validate(createPassengerSchema), createPassenger);
 
 // PUT /api/passengers/:id - Update passenger
-router.put("/:id", updatePassenger);
+router.put("/:id", validate(updatePassengerSchema), updatePassenger);
 
 // DELETE /api/passengers/:id - Delete passenger
 router.delete("/:id", deletePassenger);
