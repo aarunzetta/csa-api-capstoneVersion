@@ -9,12 +9,12 @@ const login = async (req, res) => {
     const { username, password } = req.body;
 
     // Validate input
-    if (!username || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Username and password are required.",
-      });
-    }
+    // if (!username || !password) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Username and password are required.",
+    //   });
+    // }
 
     // Find admin by username
     const [admins] = await db.query(

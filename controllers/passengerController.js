@@ -68,20 +68,20 @@ const createPassenger = async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (
-      !first_name ||
-      !last_name ||
-      !date_of_birth ||
-      !username ||
-      !email ||
-      !password
-    ) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Please provide all required fields: first_name, last_name, date_of_birth, username, email, password",
-      });
-    }
+    // if (
+    //   !first_name ||
+    //   !last_name ||
+    //   !date_of_birth ||
+    //   !username ||
+    //   !email ||
+    //   !password
+    // ) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message:
+    //       "Please provide all required fields: first_name, last_name, date_of_birth, username, email, password",
+    //   });
+    // }
 
     // Check if username already exists
     const [existingUsername] = await db.query(
