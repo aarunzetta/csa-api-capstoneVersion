@@ -8,6 +8,11 @@ const {
   deleteAdmin,
 } = require("../controllers/adminController");
 const { verifyToken } = require("../middleware/authMiddleware");
+const validate = require("../middleware/validate");
+const {
+  createAdminSchema,
+  updateAdminSchema,
+} = require("../validators/adminValidator");
 
 // All routes are protected - require authentication
 router.use(verifyToken);
@@ -18,11 +23,11 @@ router.get("/", getAllAdmins);
 // GET /api/admins/:id - Get single admin
 router.get("/:id", getAdminById);
 
-// POST /api/admins - Create new admin
-router.post("/", createAdmin);
+// POST /api/admins - Create new admin (with validation)
+router.post("/", validate(createAdminSchema), createAdmin);
 
-// PUT /api/admins/:id - Update admin
-router.put("/:id", updateAdmin);
+// PUT /api/admins/:id - Update admin (with validation)
+router.put("/:id", validate(updateAdminSchema), updateAdmin);
 
 // DELETE /api/admins/:id - Delete admin
 router.delete("/:id", deleteAdmin);
