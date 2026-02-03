@@ -72,13 +72,13 @@ const createAdmin = async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (!username || !first_name || !last_name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Please provide all required fields: username, first_name, last_name, email, password",
-      });
-    }
+    // if (!username || !first_name || !last_name || !email || !password) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message:
+    //       "Please provide all required fields: username, first_name, last_name, email, password",
+    //   });
+    // }
 
     // Validate role
     const validRoles = ["super_admin", "admin", "moderator"];
